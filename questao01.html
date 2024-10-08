@@ -1,47 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Questão 01</title>
-
-</head>
-
-<body>
-  <h1>
-    1) Dado a sequência de Fibonacci, onde se inicia por 0 e 1 e o próximo valor sempre será a soma dos 2 valores anteriores (exemplo: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34...), escreva um programa na linguagem que desejar onde, informado um número, ele calcule a sequência de Fibonacci e retorne uma mensagem avisando se o número informado pertence ou não a sequência.
-  </h1>
-
-  <script>
-    function pertenceFibonacci(numero) {
-      let a = 0;
-      let b = 1;
-
-      if (numero === 0 || numero === 1) {
-        return `O número ${numero} pertence à sequência de Fibonacci.`;
-      }
-
-      let fibonacci = a + b;
-
-      while (fibonacci <= numero) {
-        if (fibonacci === numero) {
-          return `O número ${numero} pertence à sequência de Fibonacci.`;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Fibonacci</title>
+    <link rel="shortcut icon" href="./img/icons/letter-f.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('./img/background-logic.jpg');
+            margin: 0;
+            padding: 20px;
         }
-        a = b;
-        b = fibonacci;
-        fibonacci = a + b;
-      }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #222fec;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #001974;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
 
-      return `O número ${numero} NÃO pertence à sequência de Fibonacci.`;
+<div class="container">
+    <h1>Verificador de Fibonacci</h1>
+    <input type="number" id="numero" placeholder="Informe um número" />
+    <button onclick="verificarFibonacci()">Verificar</button>
+    <div class="result" id="resultado"></div>
+</div>
+
+<script>
+    function pertenceFibonacci(numero) {
+        let a = 0;
+        let b = 1;
+
+        if (numero === 0 || numero === 1) {
+            return true;
+        }
+
+        let fibonacci = a + b;
+
+        while (fibonacci <= numero) {
+            if (fibonacci === numero) {
+                return true;
+            }
+            a = b;
+            b = fibonacci;
+            fibonacci = a + b;
+        }
+
+        return false;
     }
 
-    let numero = parseInt(prompt("Informe um número: "));
-    let resultado = pertenceFibonacci(numero);
-    alert(resultado)
+    function verificarFibonacci() {
+        const numero = parseInt(document.getElementById("numero").value);
+        const resultadoDiv = document.getElementById("resultado");
 
-  </script>
+        if (isNaN(numero)) {
+            resultadoDiv.innerText = "Por favor, insira um número válido.";
+            return;
+        }
+
+        if (pertenceFibonacci(numero)) {
+            resultadoDiv.innerText = `O número ${numero} pertence à sequência de Fibonacci.`;
+        } else {
+            resultadoDiv.innerText = `O número ${numero} NÃO pertence à sequência de Fibonacci.`;
+        }
+    }
+</script>
 
 </body>
-
 </html>
